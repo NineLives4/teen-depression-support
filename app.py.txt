@@ -1,0 +1,52 @@
+import streamlit as st
+from datetime import datetime
+
+st.set_page_config(page_title="Teen Depression Support AI", layout="centered")
+
+st.title("🧠 Teen Mental Health Support")
+st.subheader("Welcome! How can I help you today?")
+
+option = st.selectbox(
+    "Choose a support option:",
+    ["💬 Talk to AI Support", "📈 Mood Tracker", "📓 Journal Entry", "💡 Daily Tips", "🧘 Relaxation"]
+)
+
+# 1. AI Support Chat
+if option == "💬 Talk to AI Support":
+    st.info("This is a basic simulation of a chatbot. You can later connect it to GPT.")
+    user_input = st.text_input("What's on your mind?")
+    if user_input:
+        st.write("🤖 AI: I hear you. You're not alone. Talking about it is a great first step. ❤️")
+
+# 2. Mood Tracker
+elif option == "📈 Mood Tracker":
+    mood = st.slider("How are you feeling today?", 0, 10, 5)
+    st.write("Your mood today:", mood)
+    st.success("Thanks for sharing. Tracking how you feel can really help you notice patterns.")
+    st.write("🗓️", datetime.now().strftime("%A, %B %d, %Y"))
+
+# 3. Journal Entry
+elif option == "📓 Journal Entry":
+    journal = st.text_area("Write anything you'd like to get off your chest:")
+    if st.button("Save Entry"):
+        with open("journal.txt", "a") as file:
+            file.write(f"{datetime.now()}: {journal}\n\n")
+        st.success("Your journal entry has been saved. Well done for expressing yourself!")
+
+# 4. Daily Tips
+elif option == "💡 Daily Tips":
+    tips = [
+        "Go for a 10-minute walk in nature 🌿",
+        "Drink a glass of water 💧",
+        "Talk to someone you trust 📞",
+        "Write down 3 things you're grateful for 📝",
+        "Listen to your favorite music 🎵"
+    ]
+    st.write("Here are some things you can try today:")
+    for tip in tips:
+        st.write("- " + tip)
+
+# 5. Relaxation
+elif option == "🧘 Relaxation":
+    st.video("https://www.youtube.com/watch?v=inpok4MKVLM")
+    st.success("Take 5 minutes to follow this relaxation. You're doing great.")
